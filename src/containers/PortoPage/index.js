@@ -1,4 +1,18 @@
-import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core";
+import {
+  Fab,
+  Grid,
+  IconButton,
+  makeStyles,
+  Typography,
+  useMediaQuery,
+  useScrollTrigger,
+  Zoom,
+} from "@material-ui/core";
+import {
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+  SaveAlt,
+} from "@material-ui/icons";
 import React from "react";
 import { theme } from "../../App";
 import PortoBlock from "../../components/PortoBlock";
@@ -67,11 +81,42 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
   },
+  totop: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+  scroll: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: 0,
+    left: 0,
+  },
+  fab: {
+    backgroundColor: "#F4BDA4",
+    "&:hover": {
+      backgroundColor: "#FCEDE6",
+    },
+  },
 }));
 
 export default function PortoPage() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const classes = useStyles();
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
   return (
     <div className={classes.root}>
       <Grid
@@ -82,11 +127,30 @@ export default function PortoPage() {
         className={classes.gridRoot}
       >
         <Grid item xs={10}>
-          <div className={classes.frontCover}>
+          <div className={classes.frontCover} id="back-to-top-anchor">
             <div className={classes.bottomLeft}>
               <Typography align="left">Nadyah Hani Ramadhana</Typography>
-              <Typography align="left" style={{ fontWeight: "bold" }}>
-                Portfolio of November 2020
+              <Typography
+                align="left"
+                style={{
+                  fontWeight: "bold",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                component="div"
+              >
+                Portfolio of November 2020{" "}
+                <IconButton
+                  size="small"
+                  style={{ marginLeft: "8px" }}
+                  // color="primary"
+                  href={
+                    "/static/files/Portfolio%20-%20Nadyah%20Hani%20Ramadhana%20-%202020.pdf"
+                  }
+                >
+                  <SaveAlt />
+                </IconButton>
               </Typography>
             </div>
           </div>
@@ -104,12 +168,32 @@ export default function PortoPage() {
               Thank You.
             </Typography>
             <Typography align="left">
-              {`Nadyah Hani Ramadhana\n087781677523\nhani.nadyah@gmail.com\nlinkedin.com/in/nadyahhani/`}
+              {`Nadyah Hani Ramadhana\nhani.nadyah@gmail.com\nlinkedin.com/in/nadyahhani/`}
             </Typography>
           </div>
         </Grid>
         {/* <img src={bg} alt="bg" className={classes.bg} /> */}
       </Grid>
+      <Zoom in={!trigger}>
+        <div role="presentation" className={classes.scroll}>
+          <KeyboardArrowDown color="primary" />
+        </div>
+      </Zoom>
+      <Zoom in={trigger}>
+        <div
+          onClick={handleClick}
+          role="presentation"
+          className={classes.totop}
+        >
+          <Fab
+            className={classes.fab}
+            size="small"
+            aria-label="scroll back to top"
+          >
+            <KeyboardArrowUp />
+          </Fab>
+        </div>
+      </Zoom>
     </div>
   );
 }
