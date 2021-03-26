@@ -52,12 +52,15 @@ export const useStyles = makeStyles((theme) => {
       zIndex: 10,
     },
     paperRoot: {
-      margin: theme.spacing(10, 0),
+      margin: theme.spacing(10, 0, 40, 0),
       marginLeft: "50%",
       transform: "translateX(-50%)",
       width: "80%",
-      opacity: 0.9,
       borderRadius: theme.spacing(4),
+      padding: theme.spacing(4),
+      [theme.breakpoints.down("sm")]: {
+        opacity: 0.9,
+      },
     },
   };
 });

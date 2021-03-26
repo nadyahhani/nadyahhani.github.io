@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@material-ui/core";
+import { AppBar, Button, Grid, Paper, Toolbar } from "@material-ui/core";
 import React from "react";
 import { porto } from "./portoData";
 import { useStyles } from "./styles";
@@ -26,30 +26,41 @@ export default function PortoPage() {
   // 0 ==> 10 (-1)
 
   return (
-    <div className={classes.root} onMouseMove={handleMouseMove}>
-      <div className={classes.container}>
-        <Paper elevation={0} className={classes.paperRoot}>
-          <h1>Welcome!</h1>
-          <Grid container direction="column">
-            {[...porto, ...porto].map((item) => {
-              return (
-                <div key={JSON.stringify(item)}>
-                  <h2>{item.title}</h2>
-                  <p>{item.desc}</p>
-                </div>
-              );
-            })}
-          </Grid>
-        </Paper>
+    <>
+      <header>
+        <AppBar color="transparent" elevation={0} position="fixed">
+          <Toolbar>
+            <Button>Menu</Button>
+            <Button>Menu</Button>
+            <Button>Menu</Button>
+          </Toolbar>
+        </AppBar>
+      </header>
+      <div className={classes.root} onMouseMove={handleMouseMove}>
+        <div className={classes.container}>
+          <Paper elevation={0} className={classes.paperRoot}>
+            <h1>Welcome!</h1>
+            <Grid container direction="column" spacing={4}>
+              {[...porto, ...porto].map((item) => {
+                return (
+                  <div key={JSON.stringify(item)}>
+                    <h2>{item.title}</h2>
+                    <p>{item.desc}</p>
+                  </div>
+                );
+              })}
+            </Grid>
+          </Paper>
+        </div>
+        <div
+          className={classes.block1}
+          style={{ transform: `scale(2) translate(${getX(8)}%,${getY(8)}%)` }}
+        ></div>
+        <div
+          className={classes.block2}
+          style={{ transform: `scale(1.5) translate(${getX(3)}%,${getY(3)}%)` }}
+        ></div>
       </div>
-      <div
-        className={classes.block1}
-        style={{ transform: `scale(2) translate(${getX(8)}%,${getY(8)}%)` }}
-      ></div>
-      <div
-        className={classes.block2}
-        style={{ transform: `scale(1.5) translate(${getX(3)}%,${getY(3)}%)` }}
-      ></div>
-    </div>
+    </>
   );
 }
