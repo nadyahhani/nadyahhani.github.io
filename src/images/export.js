@@ -5,5 +5,17 @@ import prowd from "./prowd.png";
 import rekapin from "./rekapin.png";
 import sistem from "./sistem.png";
 import bg from "./bg.png";
+import vector from "./Vector.svg";
+import vector1 from "./Vector1.svg";
 
-export { bamburuncing, doku, petaKA, prowd, rekapin, sistem, bg };
+export {
+  bamburuncing,
+  doku,
+  petaKA,
+  prowd,
+  rekapin,
+  sistem,
+  bg,
+  vector,
+  vector1,
+};
