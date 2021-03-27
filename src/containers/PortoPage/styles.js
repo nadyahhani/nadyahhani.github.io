@@ -62,5 +62,12 @@ export const useStyles = makeStyles((theme) => {
         opacity: 0.9,
       },
     },
+    heroContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      width: "100vw",
+    },
   };
 });

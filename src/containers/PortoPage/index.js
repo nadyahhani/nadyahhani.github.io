@@ -38,8 +38,16 @@ export default function PortoPage() {
       </header>
       <div className={classes.root} onMouseMove={handleMouseMove}>
         <div className={classes.container}>
+          <div className={classes.heroContainer}>
+            <h1
+              style={{
+                transform: `scale(1.5) translate(${getX(8)}%,${getY(8)}%)`,
+              }}
+            >
+              Welcome!
+            </h1>
+          </div>
           <Paper elevation={0} className={classes.paperRoot}>
-            <h1>Welcome!</h1>
             <Grid container direction="column" spacing={4}>
               {[...porto, ...porto].map((item) => {
                 return (
